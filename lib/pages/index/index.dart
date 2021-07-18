@@ -1,6 +1,10 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/services.dart';
+import '../../model/jsonRoute.model.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class IndexPage extends StatefulWidget {
   IndexPage({Key key}) : super(key: key);
@@ -12,6 +16,15 @@ class IndexPage extends StatefulWidget {
 ////https://pub.dev/packages/carousel_slider/example -->ejemplos carousel
 
 class _IndexPageState extends State<IndexPage> {
+  getjsonroutes() async {
+    String jsonString =
+        await rootBundle.loadString("assets/RoutejsonFormatted.json");
+    final jsonResponse = jsonDecode(jsonString);
+
+    JsonRoutes routes = new JsonRoutes();
+    final jsonparsed = routes.toJson(jsonResponse);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
